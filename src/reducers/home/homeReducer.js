@@ -4,7 +4,7 @@ import { CHANGE_LIST } from './contants';
 
 const InitialState = {
   name: 'ewqeqw',
-  cityData: {}
+  cityData: { hotCities: [] }
 };
 
 export default (state = InitialState, action) => {

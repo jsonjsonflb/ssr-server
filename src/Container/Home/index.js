@@ -8,13 +8,15 @@ const Home = memo(props => {
   const [state, setState] = React.useState(11);
 
   useEffect(() => {
-    props.dispatch(getHomeList());
+    if (!cityData.hotCities.length) {
+      props.dispatch(getHomeList());
+    }
   }, []);
 
   return (
     <div>
       <Header />
-      <h2>name</h2>
+      <h2>{state}</h2>
       <button
         onClick={() => {
           setState(state + 1);
@@ -22,17 +24,18 @@ const Home = memo(props => {
       >
         Click
       </button>
-      {cityData.hotCities &&
-        cityData.hotCities.length &&
-        cityData.hotCities.map((item, index) => (
-          <h1 key={index}>{item.name}</h1>
+      <div>
+        {cityData.hotCities.map((item, index) => (
+          <p key={index}>{item.name}</p>
         ))}
+      </div>
     </div>
   );
 });
 
-Home.loadData = () => {
+Home.loadData = store => {
   // 功能：在服务端渲染之前，把这个路由需要的数据提前加载好
+  return store.dispatch(getHomeList());
 };
 
 const mapState = state => ({
