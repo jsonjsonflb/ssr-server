@@ -1,3 +1,3 @@
-const nameSpace = 'HOME/';
+const nameSpace = 'HEADER/';
 
-export const CHANGE_LIST = nameSpace + 'CHANGE_LIST';
+export const CHANG_LOGIN_STATUS = nameSpace + 'CHANG_LOGIN_STATUS';

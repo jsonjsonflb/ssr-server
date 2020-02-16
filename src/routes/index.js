@@ -1,11 +1,12 @@
 import Home from '@/Container/Home';
-import Login from '@/Container/Login';
+import Translation from '@/Container/Translation';
 import App from '@/Container/App';
 
 export default [
   {
     path: '/',
     component: App,
+    loadData: App.loadData,
     routes: [
       {
         path: '/',
@@ -14,9 +15,10 @@ export default [
         loadData: Home.loadData
       },
       {
-        path: '/login',
-        component: Login,
-        exact: true
+        path: '/translation',
+        component: Translation,
+        exact: true,
+        loadData: Translation.loadData
       }
     ]
   }

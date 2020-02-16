@@ -14,6 +14,7 @@ export const render = (req, Routes, store) => {
       </StaticRouter>
     </Provider>
   );
+
   return `
       <html>
         <head>

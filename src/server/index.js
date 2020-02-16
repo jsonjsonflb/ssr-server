@@ -26,7 +26,8 @@ app.get('*', function(req, res) {
   // 服务端获取路由地址（只能通过请求参数获取）
   const pathName = req.path;
 
-  const store = getStore();
+  // 传入req给store,使服务端在发出请求的时候可以配置cookies
+  const store = getStore(req);
   // 再这个位置 loadData ,并修改store的值
   // 根据路由的路径，来往store里面加数据
 
@@ -48,6 +49,7 @@ app.get('*', function(req, res) {
   // 让matchRoutes里面所有的组件，对应的 loadData 方法执行一次
   // console.log(matchedRoutes);
   const promises = [];
+
   matchedRoutes.forEach(item => {
     if (item.route.loadData) {
       promises.push(item.route.loadData(store));

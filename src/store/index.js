@@ -7,13 +7,13 @@ import reducers from '@/reducers';
 import clientAxios from '@/client/request';
 import serverAxios from '@/server/request';
 
-export const getStore = () => {
+export const getStore = req => {
   // 写成方法的目的：每次获取store都初始化一次，确保每个用户获取的store是独立的
 
   // 传入服务器专用的 axios 配置
   return createStore(
     reducers,
-    applyMiddleware(thunk.withExtraArgument(serverAxios))
+    applyMiddleware(thunk.withExtraArgument(serverAxios(req))) // 传入req给axios,使服务端在发出请求的时候可以配置cookies
   );
 };
 

@@ -1,16 +1,16 @@
 import _ from 'lodash';
 
-import { CHANG_LOGIN_STATUS } from './contants';
+import { GET_TRANSLATION_LIST } from './contants';
 
 const InitialState = {
-  isLogin: true
+  list: []
 };
 
 export default (state = InitialState, action) => {
   switch (action.type) {
-    case CHANG_LOGIN_STATUS:
+    case GET_TRANSLATION_LIST:
       return _.assign({}, state, {
-        isLogin: action.payload.isLogin
+        list: action.payload.list
       });
 
     default:

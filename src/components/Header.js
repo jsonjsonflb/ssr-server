@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userLogin, userLoginOut } from '@/reducers/header/actions';
 
-const Header = () => {
+const Header = props => {
+  const { isLogin } = props.state;
+
+  const handleLogin = () => {
+    props.dispatch(userLogin());
+  };
+
+  const handleLoginOut = () => {
+    props.dispatch(userLoginOut());
+  };
+
   return (
     <div>
       <Link to={'/'}>首页</Link>
       <br />
-      <Link to={'/login'}>登录</Link>
-      <br />
-      <Link to={'/login'}>列表</Link>
-      <Link to={'/login'}>退出</Link>
+      {!isLogin ? (
+        <Fragment>
+          <div onClick={() => handleLogin()}>登录</div>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <Link to={'/translation'}>列表</Link>
+          <div onClick={() => handleLoginOut()}>退出</div>
+        </Fragment>
+      )}
     </div>
   );
 };
 
-export default Header;
+const mapState = state => ({
+  state: state.header
+});
+
+export default connect(mapState, null)(Header);
