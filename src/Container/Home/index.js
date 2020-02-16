@@ -1,6 +1,5 @@
 import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
-import Header from '@/components/Header';
 import { getHomeList } from '@/reducers/home/actions';
 
 const Home = memo(props => {
@@ -15,7 +14,6 @@ const Home = memo(props => {
 
   return (
     <div>
-      <Header />
       <h2>{state}</h2>
       <button
         onClick={() => {

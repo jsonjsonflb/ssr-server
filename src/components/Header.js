@@ -1,12 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <div>
-      <Link to={"/"}>HOME</Link>
+      <Link to={'/'}>首页</Link>
       <br />
-      <Link to={"/login"}>login</Link>
+      <Link to={'/login'}>登录</Link>
+      <br />
+      <Link to={'/login'}>列表</Link>
+      <Link to={'/login'}>退出</Link>
     </div>
   );
 };

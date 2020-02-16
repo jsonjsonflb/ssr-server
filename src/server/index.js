@@ -1,7 +1,7 @@
 import express from 'express';
 import { render } from './utils';
 import proxy from 'express-http-proxy'; // 转发客户端的请求
-import { matchRoutes, renderRoutes } from 'react-router-config';
+import { matchRoutes } from 'react-router-config';
 import { getStore } from '@/store'; // 每次获取store都初始化一次，确保每个用户获取的store是独立的
 import Routes from '@/routes';
 
@@ -9,6 +9,7 @@ const app = express();
 // 请求静态资源在public里面找
 app.use(express.static('public'));
 
+// 转发客户转请求
 app.use(
   '/rest',
   proxy('localhost:3000', {
@@ -42,7 +43,7 @@ app.get('*', function(req, res) {
   //   }
   // });
 
-  // 引入react-router-config匹配多层路由
+  // 引入react-router-config匹配多层路由,然后进行请求
   const matchedRoutes = matchRoutes(Routes, pathName);
   // 让matchRoutes里面所有的组件，对应的 loadData 方法执行一次
   // console.log(matchedRoutes);

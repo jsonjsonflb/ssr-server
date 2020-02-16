@@ -1,11 +1,9 @@
 import React, { memo } from 'react';
-import Header from '@/components/Header';
 
 const Login = memo(() => {
   const [state, setState] = React.useState('Login');
   return (
     <div>
-      <Header />
       <h2>Login</h2>
       <h1>{state}</h1>
       <button
