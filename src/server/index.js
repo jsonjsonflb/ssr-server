@@ -52,13 +52,30 @@ app.get('*', function(req, res) {
 
   matchedRoutes.forEach(item => {
     if (item.route.loadData) {
-      promises.push(item.route.loadData(store));
+      const successPromise = new Promise((resolve, reject)=>{
+        // 保证每个 promise请求 都走 successPromise 的resolve，下面的Promise.all才会都走then;
+        // 某个数据请求出错，这个数据渲染就失败，也不会阻塞其他数据请求。
+        item.route.loadData(store).then(resolve).catch(resolve)
+      })
+      promises.push(successPromise);
     }
   });
 
   Promise.all(promises).then(() => {
-    res.send(render(req, Routes, store));
-  });
+    const context = {}
+    const html = render(req, Routes, store,context)
+    
+    // 在StaticRouter中 如果有 Redirect 会自动给context增加重定向的内容
+    if(context.action === 'REPLACE') {
+      res.redirect(301, context.url)
+    }else if(context.NOTFOUND) {
+      res.status(404)
+      res.send(html);
+    }else{
+      res.send(html);
+    }
+    
+  })
 });
 
 var server = app.listen(3333, () => {

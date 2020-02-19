@@ -6,10 +6,10 @@ import { Provider } from 'react-redux';
 // renderRoutes 展示路由，但只展示第一层的。容器内的还要再次渲染
 import { renderRoutes } from 'react-router-config';
 
-export const render = (req, Routes, store) => {
+export const render = (req, Routes, store, context) => {
   const content = renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.path} context={{}}>
+      <StaticRouter location={req.path} context={context}>
         <Switch>{renderRoutes(Routes)}</Switch>
       </StaticRouter>
     </Provider>
