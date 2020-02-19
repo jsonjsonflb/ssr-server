@@ -1,7 +1,7 @@
-import Home from '@/Container/Home';
-import Translation from '@/Container/Translation';
-import App from '@/Container/App';
-import NotFound from '@/Container/NotFound';
+import Home from '@/routes/Home';
+import Translation from '@/routes/Translation';
+import App from '@/routes/App';
+import NotFound from '@/routes/NotFound';
 
 export default [
   {

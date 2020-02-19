@@ -12,7 +12,7 @@ app.use(express.static('public'));
 // 转发客户转请求
 app.use(
   '/rest',
-  proxy('localhost:3000', {
+  proxy('localhost:4444', {
     proxyReqPathResolver: function(req) {
       console.log(req.url);
       // 返回的是数据服务器上，接口的名称,  /rest 是接口代理的名称
@@ -62,9 +62,8 @@ app.get('*', function(req, res) {
   });
 
   Promise.all(promises).then(() => {
-    const context = {}
+    const context = {css: []}
     const html = render(req, Routes, store,context)
-    
     // 在StaticRouter中 如果有 Redirect 会自动给context增加重定向的内容
     if(context.action === 'REPLACE') {
       res.redirect(301, context.url)

@@ -2,6 +2,7 @@
 const path = require("path");
 const baseConfig = require("./webpack.base");
 const merge = require("webpack-merge");
+const CopyPlugin = require('copy-webpack-plugin');
 
 const configg = {
   mode: "development",
@@ -10,6 +11,32 @@ const configg = {
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "index.js"
+  },
+  plugins: [
+    new CopyPlugin([
+      { from: path.resolve(__dirname, './statics'), to: 'statics' }
+    ])
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1, // 向前两个loader，确保都加上前缀
+              modules: {
+                mode: "local",
+                localIdentName: "[name]__[local]__[hash:base64:5]"
+              }
+            }
+          },
+          'postcss-loader'
+        ]
+      }
+    ]
   }
 };
 

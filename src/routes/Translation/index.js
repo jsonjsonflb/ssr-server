@@ -24,13 +24,15 @@ const Translation = memo(props => {
   );
 });
 
-Translation.loadData = store => {
-  return store.dispatch(getTranslationList());
-};
-
 const mapState = state => ({
   state: state.translation,
   all: state
 });
 
-export default connect(mapState, null)(Translation);
+const exportComponent = connect(mapState, null)(Translation)
+
+exportComponent.loadData = store => {
+  return store.dispatch(getTranslationList());
+};
+
+export default exportComponent;
