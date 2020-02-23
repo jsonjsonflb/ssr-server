@@ -3,7 +3,7 @@ import { render } from './utils';
 import proxy from 'express-http-proxy'; // 转发客户端的请求
 import { matchRoutes } from 'react-router-config';
 import { getStore } from '@/store'; // 每次获取store都初始化一次，确保每个用户获取的store是独立的
-import Routes from '@/routes';
+import Routes from '@/routes/index';
 
 const app = express();
 // 请求静态资源在public里面找
@@ -52,29 +52,31 @@ app.get('*', function(req, res) {
 
   matchedRoutes.forEach(item => {
     if (item.route.loadData) {
-      const successPromise = new Promise((resolve, reject)=>{
+      const successPromise = new Promise((resolve, reject) => {
         // 保证每个 promise请求 都走 successPromise 的resolve，下面的Promise.all才会都走then;
         // 某个数据请求出错，这个数据渲染就失败，也不会阻塞其他数据请求。
-        item.route.loadData(store).then(resolve).catch(resolve)
-      })
+        item.route
+          .loadData(store)
+          .then(resolve)
+          .catch(resolve);
+      });
       promises.push(successPromise);
     }
   });
 
   Promise.all(promises).then(() => {
-    const context = {css: []}
-    const html = render(req, Routes, store,context)
+    const context = { css: [] };
+    const html = render(req, Routes, store, context);
     // 在StaticRouter中 如果有 Redirect 会自动给context增加重定向的内容
-    if(context.action === 'REPLACE') {
-      res.redirect(301, context.url)
-    }else if(context.NOTFOUND) {
-      res.status(404)
+    if (context.action === 'REPLACE') {
+      res.redirect(301, context.url);
+    } else if (context.NOTFOUND) {
+      res.status(404);
       res.send(html);
-    }else{
+    } else {
       res.send(html);
     }
-    
-  })
+  });
 });
 
 var server = app.listen(3333, () => {

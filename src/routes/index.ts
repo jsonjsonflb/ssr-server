@@ -1,4 +1,4 @@
-// import Home from '@/routes/Home';
+import HomePage from '@/routes/HomePage/HomePage';
 // import Translation from '@/routes/Translation';
 import App from '@/routes/App';
 // import NotFound from '@/routes/NotFound';
@@ -9,12 +9,12 @@ export default [
     component: App,
     loadData: App.loadData,
     routes: [
-      // {
-      //   path: '/',
-      //   component: Home,
-      //   exact: true,
-      //   loadData: Home.loadData
-      // },
+      {
+        path: '/',
+        component: HomePage,
+        exact: true,
+        loadData: HomePage.loadData
+      }
       // {
       //   path: '/translation',
       //   component: Translation,

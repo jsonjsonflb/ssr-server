@@ -33,6 +33,24 @@ const config = {
           },
           'postcss-loader'
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2, // 向前两个loader，确保都加上前缀
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]__[hash:base64:5]'
+              }
+            }
+          },
+          'postcss-loader',
+          'sass-loader'
+        ]
       }
     ]
   }
