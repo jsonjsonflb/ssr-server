@@ -1,29 +1,26 @@
-// 浏览器端代码打包
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
-const CopyPlugin = require('copy-webpack-plugin');
 
-const configg = {
+const config = {
   mode: 'development',
+  target: 'node', // 编译以在类似Node.js的环境中使用（使用Node.js需要加载块）
   watch: true,
-  entry: path.join(__dirname, 'src', 'client/index.tsx'),
-  devtool: 'inline-source-map',
+  externals: [nodeExternals()], //  为了不把node_modeuls目录下的第三方模块打包进输出文件中
+  entry: './src/server/index.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'index.js'
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/dist/',
+    filename: 'bundle.js',
+    chunkFilename: '[name].[hash:6].js'
   },
-  plugins: [
-    new CopyPlugin([
-      { from: path.resolve(__dirname, './statics'), to: 'statics' }
-    ])
-  ],
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          'isomorphic-style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -41,4 +38,4 @@ const configg = {
   }
 };
 
-module.exports = merge(baseConfig, configg);
+module.exports = merge(baseConfig, config);

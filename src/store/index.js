@@ -4,7 +4,7 @@ import reducers from '@/reducers';
 // 解决问题： 在服务端发起请求的时候，因为没有域名，导致请求失败
 // 根据客户端和服务端，使用不用的 axios，即：在不同情况下，增加请求地址前缀
 // 利用 redux-thunk中 withExtraArgument，给thunk中增加一个可自定义的参数
-import clientAxios from '@/client/request';
+import clientAxios from '@/client/request.ts';
 import serverAxios from '@/server/request';
 
 export const getStore = req => {

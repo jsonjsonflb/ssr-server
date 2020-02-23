@@ -1,10 +1,10 @@
-import React from "react";
-import { renderToString } from "react-dom/server";
-import { StaticRouter, Route, Switch, matchPath } from "react-router-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { StaticRouter, Route, Switch, matchPath } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 // renderRoutes 展示路由，但只展示第一层的。容器内的还要再次渲染
-import { renderRoutes } from "react-router-config";
+import { renderRoutes } from 'react-router-config';
 
 export const render = (req, Routes, store, context) => {
   const content = renderToString(
@@ -16,7 +16,8 @@ export const render = (req, Routes, store, context) => {
   );
 
   // 处理服务端样式
-  const cssStr = context.css && context.css.length ? context.css.join('\n') : "";
+  const cssStr =
+    context.css && context.css.length ? context.css.join('\n') : '';
   console.log(cssStr);
 
   return `
@@ -34,7 +35,6 @@ export const render = (req, Routes, store, context) => {
           <style>
             ${cssStr}
           </style>
-          <script src="/statics/lib/rem.js"></script>
         </head>
         <body>
           <div id="root">${content}</div>
