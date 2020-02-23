@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { getHomeList } from '@/reducers/home/actions';
 import { connect } from 'react-redux';
+import { helper } from '@/utils';
 import { Button } from '@material-ui/core';
-import style from './style.scss';
+import style from './style.css';
 
 // 初始化swiper
 
@@ -12,6 +13,13 @@ const initSwiper = () => {
 
 const HomePage = (props: any) => {
   const { cityData } = props.state;
+  if (process.env.isSSR) {
+    const withStyle = useMemo(() => {
+      console.log('home-css');
+      return helper.withStyle(props, style);
+    }, []);
+  }
+
   return (
     <div>
       <div className={style.banner_wrap}>

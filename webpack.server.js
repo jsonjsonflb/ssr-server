@@ -2,6 +2,8 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   mode: 'development',
@@ -11,7 +13,6 @@ const config = {
   entry: './src/server/index.js',
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/',
     filename: 'bundle.js',
     chunkFilename: '[name].[hash:6].js'
   },
@@ -53,7 +54,11 @@ const config = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({ template: './src/template/index.html' }),
+    new webpack.DefinePlugin({ 'process.env.isSSR': true })
+  ]
 };
 
 module.exports = merge(baseConfig, config);

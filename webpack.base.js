@@ -1,5 +1,6 @@
 const path = require('path');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 module.exports = {
   module: {
     rules: [
@@ -29,8 +30,68 @@ module.exports = {
         exclude: [path.resolve(__dirname, 'node_modules')],
         exclude: /node_modules/
       }
+      // {
+      //   test: /\.scss$/,
+      //   use: [
+      //     {
+      //       loader: MiniCssExtractPlugin.loader,
+      //       options: {
+      //         // you can specify a publicPath here
+      //         // by default it uses publicPath in webpackOptions.output
+      //         publicPath: '../',
+      //         hmr: devMode
+      //       }
+      //     },
+      //     {
+      //       loader: 'css-loader',
+      //       options: {
+      //         importLoaders: 2, // 向前两个loader，确保都加上前缀
+      //         modules: {
+      //           mode: 'local',
+      //           localIdentName: '[name]__[local]__[hash:base64:5]'
+      //         }
+      //       }
+      //     },
+      //     'postcss-loader',
+      //     'sass-loader'
+      //   ]
+      // },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     {
+      //       loader: MiniCssExtractPlugin.loader,
+      //       options: {
+      //         // you can specify a publicPath here
+      //         // by default it uses publicPath in webpackOptions.output
+      //         publicPath: '../',
+      //         hmr: devMode
+      //       }
+      //     },
+      //     {
+      //       loader: 'css-loader',
+      //       options: {
+      //         importLoaders: 1, // 向前两个loader，确保都加上前缀
+      //         modules: {
+      //           mode: 'local',
+      //           localIdentName: '[name]__[local]__[hash:base64:5]'
+      //         }
+      //       }
+      //     },
+      //     'postcss-loader'
+      //   ]
+      // }
     ]
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // all options are optional
+      filename: 'statics/css/[name].[contentHash:6].css?v=[contentHash:6]',
+      chunkFilename: '[id].css?v=[contentHash:6]',
+      ignoreOrder: false // Enable to remove warnings about conflicting order
+    })
+  ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {

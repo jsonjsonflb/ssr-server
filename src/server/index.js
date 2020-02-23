@@ -4,6 +4,7 @@ import proxy from 'express-http-proxy'; // 转发客户端的请求
 import { matchRoutes } from 'react-router-config';
 import { getStore } from '@/store'; // 每次获取store都初始化一次，确保每个用户获取的store是独立的
 import Routes from '@/routes/index';
+import { SSR_PORT } from '@/config/config';
 
 const app = express();
 // 请求静态资源在public里面找
@@ -64,21 +65,26 @@ app.get('*', function(req, res) {
     }
   });
 
-  Promise.all(promises).then(() => {
-    const context = { css: [] };
-    const html = render(req, Routes, store, context);
-    // 在StaticRouter中 如果有 Redirect 会自动给context增加重定向的内容
-    if (context.action === 'REPLACE') {
-      res.redirect(301, context.url);
-    } else if (context.NOTFOUND) {
-      res.status(404);
-      res.send(html);
-    } else {
-      res.send(html);
-    }
-  });
+  // 上下文对象
+  const context = { css: [] };
+
+  Promise.all(promises)
+    .then(() => {
+      return render(req, Routes, store, context);
+    })
+    .then(html => {
+      // 在StaticRouter中 如果有 Redirect 会自动给context增加重定向的内容
+      if (context.action === 'REPLACE') {
+        res.redirect(301, context.url);
+      } else if (context.NOTFOUND) {
+        res.status(404);
+        res.send(html);
+      } else {
+        res.send(html);
+      }
+    });
 });
 
-var server = app.listen(3333, () => {
-  console.log('start at 3333');
+var server = app.listen(SSR_PORT, () => {
+  console.log(`SSR running on port ${SSR_PORT}`);
 });
