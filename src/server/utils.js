@@ -32,13 +32,12 @@ export const render = (req, Routes, store, context) => {
         .replace('<style></style>', `<style>${cssStr}</style>`)
         .replace('<div id="root"></div>', `<div id="root">${content}</div>`)
         .replace(
-          '<script type="text/javascript" src="bundle.js"></script>',
+          '<script></script>',
           `<script>
             window.context = {
               state: ${JSON.stringify(store.getState())}
             }
-          </script>
-          <script type="text/javascript" src="/index.js"></script>`
+          </script>`
         );
       resolve(data);
     });

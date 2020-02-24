@@ -1,7 +1,7 @@
 import HomePage from '@/routes/HomePage/HomePage';
 // import Translation from '@/routes/Translation';
 import App from '@/routes/App';
-// import NotFound from '@/routes/NotFound';
+import Main from '@/routes/Mian/Main';
 
 export default [
   {
@@ -14,7 +14,13 @@ export default [
         component: HomePage,
         exact: true,
         loadData: HomePage.loadData
+      },
+      {
+        path: '/main',
+        component: Main,
+        exact: true
       }
+
       // {
       //   path: '/translation',
       //   component: Translation,
