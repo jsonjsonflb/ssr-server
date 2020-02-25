@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
 import style from './style.scss';
-// import './test.css';
 
 const Banner = () => {
   var settings = {
@@ -13,6 +12,7 @@ const Banner = () => {
     slidesToShow: 1,
     slidesToScroll: 1
   };
+  console.log(style);
 
   return (
     <div className={style.banner_wrap}>

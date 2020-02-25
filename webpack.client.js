@@ -27,14 +27,9 @@ const configg = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1, // 向前两个loader，确保都加上前缀
-              modules: {
-                mode: 'local',
-                localIdentName: '[name]__[local]__[hash:base64:5]'
-              }
+              esModule: true
             }
-          },
-          'postcss-loader'
+          }
         ]
       },
       {

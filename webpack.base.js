@@ -27,7 +27,6 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         include: [path.resolve(__dirname, 'src')],
-        exclude: [path.resolve(__dirname, 'node_modules')],
         exclude: /node_modules/
       },
       {
@@ -108,13 +107,13 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // all options are optional
-      filename: 'statics/css/[name].[contentHash:6].css?v=[contentHash:6]',
-      chunkFilename: '[id].css?v=[contentHash:6]',
-      ignoreOrder: false // Enable to remove warnings about conflicting order
-    })
+    // new MiniCssExtractPlugin({
+    //   // Options similar to the same options in webpackOptions.output
+    //   // all options are optional
+    //   filename: 'statics/css/[name].[contentHash:6].css?v=[contentHash:6]',
+    //   chunkFilename: '[id].css?v=[contentHash:6]',
+    //   ignoreOrder: false // Enable to remove warnings about conflicting order
+    // })
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
