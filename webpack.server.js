@@ -9,7 +9,11 @@ const config = {
   mode: 'development',
   target: 'node', // 编译以在类似Node.js的环境中使用（使用Node.js需要加载块）
   watch: true,
-  externals: [nodeExternals()], //  为了不把node_modeuls目录下的第三方模块打包进输出文件中
+  externals: [
+    nodeExternals({
+      whitelist: [/react-slick/, /slick-carousel/]
+    })
+  ], //  为了不把node_modeuls目录下的第三方模块打包进输出文件中
   entry: './src/server/index.js',
   output: {
     path: path.join(__dirname, 'dist'),

@@ -11,3 +11,8 @@ export const withStyle = (props: any, styles: any) => {
   }
   return false;
 };
+
+// 拼接类名
+export const concatClass = (...names: string[]) => {
+  return names.join(' ');
+};

@@ -1,41 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { helper } from '@/utils';
 import style from './style.scss';
 
-const Banner = () => {
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
-  console.log(style);
+// 参数
+const settings: any = {
+  pauseOnHover: false,
+  autoplay: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: null,
+  prevArrow: null
+};
 
+// banner数据
+const datas = [
+  {
+    src: './statics/images/home/slider1.jpg'
+  },
+  {
+    src: './statics/images/home/slider2.jpg'
+  },
+  {
+    src: './statics/images/home/slider3.jpg'
+  },
+  {
+    src: './statics/images/home/slider4.jpg'
+  }
+];
+
+const Banner = () => {
   return (
-    <div className={style.banner_wrap}>
+    <div className={helper.concatClass(style.banner_wrap, 'home_banner_wrap')}>
       <Slider {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
+        {datas.map((item, index) => (
+          <div key={index} className={style.slick_item}>
+            <div
+              style={{ backgroundImage: `url(${item.src})` }}
+              className={style.slick_item_inner}
+            ></div>
+          </div>
+        ))}
       </Slider>
+      <div className={style.content_wrap}>
+        <h1>{'title'}</h1>
+      </div>
     </div>
   );
 };
