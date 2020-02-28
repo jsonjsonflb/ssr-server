@@ -22,7 +22,26 @@
   top: 0;
   z-index: 9;
   justify-content: center;
-  align-self: center;
+  align-items: center;
+
+  .content_inner {
+    height: 50px;
+    line-height: 50px;
+    margin-top: -25px;
+    // &::after {
+    //   content: "|";
+    //   animation: blink 1s infinite;
+    // }
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 :global {

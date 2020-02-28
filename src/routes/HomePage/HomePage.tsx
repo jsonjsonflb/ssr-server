@@ -14,7 +14,7 @@ const HomePage = (props: any) => {
   }, []);
 
   return (
-    <div>
+    <div className={style.HomePage}>
       <Banner />
     </div>
   );
