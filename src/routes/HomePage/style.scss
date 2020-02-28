@@ -25,13 +25,7 @@
   align-items: center;
 
   .content_inner {
-    height: 50px;
-    line-height: 50px;
-    margin-top: -25px;
-    // &::after {
-    //   content: "|";
-    //   animation: blink 1s infinite;
-    // }
+    color: #fff;
   }
 }
 
@@ -48,6 +42,9 @@
   .home_banner_wrap {
     .slick-arrow {
       display: none !important;
+    }
+    .typed-cursor {
+      color: #fff;
     }
   }
 }

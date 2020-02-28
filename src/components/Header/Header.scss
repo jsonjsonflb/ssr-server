@@ -1,0 +1,50 @@
+.header_wrap {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  padding: 20px 0;
+
+  &.scroll_header {
+    background-color: #222;
+    border-bottom: 1px solid #323232;
+  }
+
+  ul {
+    margin-bottom: 0;
+  }
+
+  // logo切换
+  @media (max-width: 768px) {
+    .logo {
+      display: none;
+    }
+  }
+
+  .justify_content {
+    height: 30px;
+
+    .logo {
+      height: 30px;
+      img {
+        vertical-align: top;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+
+  .nav_list {
+    text-align: right;
+    .nav_item {
+      vertical-align: middle;
+      line-height: 30px;
+      height: 100%;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin: 0 25px;
+      display: inline-block;
+    }
+  }
+}

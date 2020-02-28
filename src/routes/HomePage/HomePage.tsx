@@ -3,10 +3,8 @@ import { getHomeList } from '@/reducers/home/actions';
 import { connect } from 'react-redux';
 import { helper } from '@/utils';
 import Banner from './Banner';
-
-import { Button } from '@material-ui/core';
 import style from './style.scss';
-
+console.log(style);
 const HomePage = (props: any) => {
   const { cityData } = props.state;
   const withStyle = useMemo(() => {

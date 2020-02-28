@@ -11,7 +11,11 @@ const config = {
   watch: true,
   externals: [
     nodeExternals({
-      whitelist: [/react-slick/, /slick-carousel/]
+      whitelist: [
+        /react-slick/,
+        /slick-carousel/,
+        'bootstrap/dist/css/bootstrap.min.css'
+      ]
     })
   ], //  为了不把node_modeuls目录下的第三方模块打包进输出文件中
   entry: './src/server/index.js',
