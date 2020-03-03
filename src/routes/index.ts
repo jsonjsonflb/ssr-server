@@ -1,9 +1,14 @@
 import HomePage from '@/routes/HomePage/HomePage';
 // import Translation from '@/routes/Translation';
 import App from '@/routes/App';
-import Main from '@/routes/Mian/Main';
+import Canvas from '@/routes/Canvas/Canvas';
 
 export default [
+  {
+    path: '/canvas',
+    component: Canvas,
+    exact: true
+  },
   {
     path: '/',
     component: App,
@@ -14,11 +19,6 @@ export default [
         component: HomePage,
         exact: true,
         loadData: HomePage.loadData
-      },
-      {
-        path: '/main',
-        component: Main,
-        exact: true
       }
 
       // {

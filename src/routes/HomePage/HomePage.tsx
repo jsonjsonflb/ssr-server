@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { helper } from '@/utils';
 import Banner from './Banner';
 import style from './style.scss';
-console.log(style);
+
 const HomePage = (props: any) => {
   const { cityData } = props.state;
   const withStyle = useMemo(() => {
